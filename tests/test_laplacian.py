@@ -166,3 +166,67 @@ def test_dp3_chiral_tower_protected():
         bas = charged_basis(ch, m, 6, cloud)
         w = link_charged_spectrum(G3d, ch, m, bas, nodes, level=0.5, weights=wts)
         assert abs(float(w[0]) / (lam * (lam + 4.0)) - 1.0) < 1e-6
+
+
+def _dp3_invariant_basis(degree, samples, group, tol=1e-12):
+    from sugrasol.laplacian import orthonormal_basis
+    from sugrasol.ypq import _monomials, _poly_powers
+
+    powers = _poly_powers(degree)
+
+    def raw(s):
+        gs = jnp.einsum("gij,j->gi", group, s)
+        sym = jnp.mean(jax.vmap(lambda g: _monomials(g, powers))(gs), axis=0)
+        return jnp.concatenate([jnp.ones(1), sym])   # + the constant mode
+
+    return orthonormal_basis(raw, samples, tol=tol)
+
+
+def test_dp3_lambda2_regression():
+    """Regression on the SECOND D6-invariant eigenvalue of the learned dP3
+    metric -- the one the paper claims corrects DHHKW's 17.2.
+
+    Their lambda2 comes from a power series about the hexagon centre at only
+    two orders (17.4 -> 17.2, eq. 6.10, still moving 1.2%); ours is a global
+    Rayleigh-Ritz and is converged in all three knobs (metric degree,
+    trial-space degree, quadrature order) -- see experiments/dp3/lambda_compare.py.
+    Locked here so a change in the tool cannot silently move the claim.
+
+    Conversion to DHHKW's Ric=g normalization: lambda * 4 / S, S = Abreu
+    scalar (12 in our doubled slice)."""
+    from pathlib import Path
+
+    from sugrasol.cone import B_DP3, dp3
+    from sugrasol.artifacts import load_psi_dp3
+    from sugrasol.laplacian import polygon_quadrature
+    from sugrasol.ypq import dihedral_matrices
+
+    npz = (Path(__file__).resolve().parents[1]
+           / "experiments/dp3smooth/dp3_G_deg18.npz")
+    psi, ch, _ = load_psi_dp3(npz)
+    u = slice_potential(ch, psi)
+    group = dihedral_matrices(ch.verts_s)
+
+    hinv = lambda s: jnp.linalg.inv(jax.hessian(u)(s))          # noqa: E731
+    probe = sample_slice(jax.random.PRNGKey(9), ch, 200, eps=1e-2)
+    S = float(jnp.mean(jax.vmap(lambda s: -jnp.einsum(
+        "jkjk->", jax.jacfwd(jax.jacfwd(hinv))(s)))(probe)))
+    assert abs(S / 12.0 - 1.0) < 1e-4                            # Abreu anchor
+
+    cloud = sample_slice(jax.random.PRNGKey(5), ch, 20000, eps=1e-4)
+    nodes, wts = polygon_quadrature(ch.verts_s, ngl=24)
+    lam = {}
+    for deg in (12, 16):
+        w = laplace_spectrum(u, _dp3_invariant_basis(deg, cloud, group),
+                             nodes, weights=wts)
+        lam[deg] = (float(w[1]) * 4 / S, float(w[2]) * 4 / S)
+
+    # Rayleigh-Ritz bounds from ABOVE: enlarging the trial space cannot raise
+    # an eigenvalue.  A violation would mean the quadrature, not the basis, is
+    # the limiting error.
+    assert lam[12][0] >= lam[16][0] - 1e-10
+    assert lam[12][1] >= lam[16][1] - 1e-10
+
+    l1, l2 = lam[16]
+    assert abs(l1 / 6.322773 - 1.0) < 1e-4      # lambda1, DHHKW's 6.322
+    assert abs(l2 / 17.09405 - 1.0) < 1e-4      # lambda2, vs DHHKW's 17.2

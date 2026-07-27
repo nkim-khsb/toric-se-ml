@@ -11,41 +11,30 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.patches import Polygon
-from scipy.optimize import minimize
+
+
+from pathlib import Path
 
 from sugrasol.cone import B_CONIFOLD, B_DP3, conifold, dp3
+from sugrasol.artifacts import load_psi_dp3
 from sugrasol.laplacian import (laplace_spectrum, polygon_quadrature,
                                 slice_potential)
 from sugrasol.ypq import (
-    _monomials, _poly_powers, dihedral_matrices, loss_fn, residual_on_slice,
-    sample_slice, slice_chart, sym_ortho_psi, t_of_s, whiten_sym_poly,
+    _monomials, _poly_powers, dihedral_matrices, sample_slice, slice_chart,
+    t_of_s,
 )
 
 jax.config.update("jax_enable_x64", True)
 BLUE, RED = "#4c72b0", "#c44e52"
 
-# ------------------------------------------------------------- train dP3
-ch = slice_chart(dp3(), B_DP3)
+# --------------------------------------------------- load the persisted dP3
+# The artifact IS the metric quoted in the paper; refitting here would risk
+# drifting from it (and, before 2026-07-26, silently refit at truncated rank).
+NPZ = (Path(__file__).resolve().parents[1] / "dp3smooth" / "dp3_G_deg14.npz")
+psi, ch, _dat = load_psi_dp3(NPZ)
 group = dihedral_matrices(ch.verts_s)
-ss = sample_slice(jax.random.PRNGKey(1), ch, 2048, eps=2e-3)
-powers, W, grp = whiten_sym_poly(14, ss, group)
-nc = W.shape[1]
-
-
-def Lf(v):
-    return loss_fn(ch, sym_ortho_psi(v[:nc], powers, W, grp), v[nc], ss)
-
-
-vg = jax.jit(jax.value_and_grad(Lf))
-r0 = jax.vmap(lambda s: residual_on_slice(ch, lambda s: 0.0, s))(ss)
-v0 = np.zeros(nc + 1)
-v0[nc] = -float(jnp.mean(r0))
-res = minimize(lambda v: (lambda l, g: (float(l), np.asarray(g)))(*vg(jnp.asarray(v))),
-               v0, jac=True, method="L-BFGS-B",
-               options=dict(maxiter=20000, ftol=1e-18, gtol=1e-16))
-v = jnp.asarray(res.x)
-psi = sym_ortho_psi(v[:nc], powers, W, grp)
-print(f"dP3 trained loss {res.fun:.2e}")
+print(f"dP3 deg-{int(_dat['degree'])}: {_dat['W'].shape[1]} params, "
+      f"held-out loss {float(_dat['loss_test']):.2e}")
 
 
 def abreu_S(s):
@@ -68,6 +57,9 @@ Zpsi = np.array(jax.vmap(psi)(pts)).reshape(GX.shape)
 ZS = np.array(jax.vmap(abreu_S)(pts)).reshape(GX.shape)
 Zpsi[~inside] = np.nan
 ZS[~inside] = np.nan
+_dev = np.abs(ZS[inside] / 12.0 - 1.0)
+print(f"Abreu S on the plotted region: max |S/12-1| = {_dev.max() * 100:.4f}%, "
+      f"mean {_dev.mean() * 100:.5f}%  ({inside.sum()} grid points)")
 
 
 def hexagon(ax):
@@ -86,10 +78,12 @@ a1.contour(GX, GY, Zpsi, levels=18, colors="k", linewidths=0.3, alpha=0.4)
 hexagon(a1)
 fig.colorbar(c1, ax=a1, fraction=0.046)
 a1.set_title(r"learned correction $\psi$ (D6-invariant)")
-c2 = a2.contourf(GX, GY, ZS, levels=np.linspace(11.99, 12.01, 21), cmap="RdBu_r",
+# Window must CONTAIN the worst deviation (0.019% of 12 = 0.0023), or the extreme
+# points saturate the colour scale and the caption's number is invisible.
+c2 = a2.contourf(GX, GY, ZS, levels=np.linspace(11.997, 12.003, 25), cmap="RdBu_r",
                  extend="both")
 hexagon(a2)
-fig.colorbar(c2, ax=a2, fraction=0.046, ticks=[11.99, 12.0, 12.01])
+fig.colorbar(c2, ax=a2, fraction=0.046, ticks=[11.997, 12.0, 12.003])
 a2.set_title(r"Abreu scalar $S$ (KE $\Rightarrow S\equiv 12$)")
 fig.tight_layout()
 fig.savefig("experiments/dp3/fig_dp3_learned.png", dpi=160)
@@ -125,8 +119,9 @@ def sym_basis(degree, samples, tol=1e-12):
 
 
 # conifold anchor: convergence of |lambda1 - 6| for Monte-Carlo vs deterministic
-# quadrature.  MC plateaus (variance + boundary-exclusion bias, error bars over
-# seeds); deterministic polygon quadrature drops to machine precision.
+# quadrature.  MC falls only as N^{-1/2} (variance + boundary-exclusion bias, RMS
+# over seeds), still ~0.3% at 8e4 points; deterministic polygon quadrature reaches
+# machine precision with a few hundred nodes.
 chc = slice_chart(conifold(), B_CONIFOLD)
 uc = slice_potential(chc, lambda s: 0.0)
 

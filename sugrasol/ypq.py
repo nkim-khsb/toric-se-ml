@@ -27,10 +27,12 @@ description does not care whether b is rational (MSY Sec. 2.5; notes §3.3).
 """
 from __future__ import annotations
 
+import warnings
 from typing import Callable, NamedTuple
 
 import jax
 import jax.numpy as jnp
+import numpy as np
 
 from .cone import MomentCone
 
@@ -221,15 +223,61 @@ def dihedral_matrices(verts_s: jnp.ndarray) -> jnp.ndarray:
     return jnp.stack(mats)  # (2d, 2, 2)
 
 
+def invariant_dimension(group: jnp.ndarray, degree: int, tol: float = 1e-6):
+    """Dimension of the G-invariant polynomials of degree 2..`degree`, exactly,
+    by Molien's series -- the ground truth the SVD rank below must reproduce.
+
+        sum_k dim(Inv_k) t^k = (1/|G|) sum_{g in G} 1 / det(1 - t g),
+
+    and for 2x2 g the expansion 1/det(1 - t g) = sum_k c_k t^k obeys
+    c_0 = 1, c_1 = tr g, c_k = (tr g) c_{k-1} - (det g) c_{k-2}.  For the dP3
+    hexagon this returns 14 at degree 14 and 21 at degree 18, matching the count
+    of DHHKW's U^i V^j (deg U = 2, deg V = 6, their eq. (5.1)).
+
+    Returns None when the dimensions come out non-integral, which means `group`
+    is not a finite matrix group in this representation -- e.g.
+    `dihedral_matrices` applied to a polygon whose centroid is not the origin,
+    where the symmetries are affine and not linear.  Better no check than a
+    wrong one.
+    """
+    G = np.asarray(group, dtype=float)
+    dims = np.zeros(degree + 1)
+    for g in G:
+        tr, dt = float(np.trace(g)), float(np.linalg.det(g))
+        c = np.zeros(degree + 1)
+        c[0] = 1.0
+        if degree >= 1:
+            c[1] = tr
+        for k in range(2, degree + 1):
+            c[k] = tr * c[k - 1] - dt * c[k - 2]
+        dims += c
+    dims /= len(G)
+    if np.max(np.abs(dims - np.round(dims))) > tol:
+        return None
+    return int(round(dims[2:].sum()))
+
+
 def whiten_sym_poly(degree: int, samples: jnp.ndarray, group: jnp.ndarray,
-                    tol: float = 1e-9):
+                    tol: float = 1e-14):
     """Orthonormal basis of the GROUP-INVARIANT degree-<=deg polynomials over
     `samples`.  Features are group-averaged monomials; symmetrization makes the
     monomial family rank-deficient, so we orthonormalize its column space by SVD
     (not QR).  Constant/linear are absent by construction (monomials start at
     degree 2) AND linear carries no invariant under D6 -> the affine gauge is
     removed by the symmetry itself; no anchor gauge-fixing (which would break
-    invariance).  Returns (powers, W, group); psi = coeffs @ (feat(s) @ W)."""
+    invariance).  Returns (powers, W, group); psi = coeffs @ (feat(s) @ W).
+
+    On `tol`.  The group-averaged monomials are severely collinear -- on the dP3
+    hexagon their singular values span ten orders -- so this one RELATIVE
+    threshold decides how many genuine invariant directions survive, and the
+    default used to silently discard some of them: 11 of 14 at degree 14, 17 of
+    21 at degree 18, which cost a factor 25 in held-out residual and 3.5 in the
+    Einstein-condition error (log.md 2026-07-26; the same conditioning trap as
+    the 2026-07-12 Y^{p,q} "degree-10 mirage" and the 2026-07-20 "tol=1e-9
+    truncates deg>14", whose fix moved the tolerance without removing the
+    truncation).  The default is now 1e-14, and the retained rank is checked
+    against Molien's exact count so that a truncation cannot pass unnoticed.
+    """
     powers = _poly_powers(degree)
 
     def feat(s):
@@ -239,6 +287,12 @@ def whiten_sym_poly(degree: int, samples: jnp.ndarray, group: jnp.ndarray,
     A = jax.vmap(feat)(samples)                               # (N, K)
     U, S, Vt = jnp.linalg.svd(A, full_matrices=False)
     r = int(jnp.sum(S > tol * S[0]))                         # invariant dim
+    expect = invariant_dimension(group, degree)
+    if expect is not None and r < expect:
+        warnings.warn(
+            f"whiten_sym_poly: kept {r} of the {expect} invariant directions at "
+            f"degree {degree} (tol={tol:.0e}); the discarded ones are real, not "
+            f"noise. Lower tol or use more samples.", RuntimeWarning, stacklevel=2)
     W = Vt[:r].T / S[:r]                                     # (K, r), cols orthonormal on samples
     return powers, W, group
 

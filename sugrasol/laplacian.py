@@ -95,6 +95,38 @@ def slice_potential(chart, psi):
     return u
 
 
+def abreu_scalar(chart, psi):
+    """Abreu's transverse scalar curvature S(s) = -d_j d_k u^{jk} (math/0004122),
+    fourth order in u and never part of the second-order training loss."""
+    u = slice_potential(chart, psi)
+
+    def S(s):
+        Hinv = lambda z: jnp.linalg.inv(jax.hessian(u)(z))
+        return -jnp.einsum("jkjk->", jax.jacfwd(jax.jacfwd(Hinv))(s))
+
+    return S
+
+
+def abreu_grid(psi, chart, n: int = 240, pad: float = 0.02, eps: float = 1e-3,
+               target: float = 12.0):
+    """max/mean of |S/target - 1| on an n x n grid over the slice polygon.
+
+    A DETERMINISTIC estimator, deliberately not a sample maximum: on 2026-07-26 a
+    200-point Monte-Carlo maximum was found to understate the polynomial's worst
+    Abreu deviation by a factor ~2 (0.011% -> 0.019%), so anything compared with
+    the polynomial's number must be scored the same way.  Returns a dict."""
+    verts = np.asarray(chart.verts_s)
+    lo, hi = verts.min(0) - pad, verts.max(0) + pad
+    GX, GY = np.meshgrid(np.linspace(lo[0], hi[0], n), np.linspace(lo[1], hi[1], n))
+    pts = jnp.asarray(np.stack([GX.ravel(), GY.ravel()], axis=1))
+    t_of = lambda s: chart.t0 + s @ chart.f
+    inside = np.asarray(jax.vmap(lambda s: chart.cone.is_interior(t_of(s), eps))(pts))
+    vals = np.asarray(jax.vmap(abreu_scalar(chart, psi))(pts))[inside.astype(bool)]
+    dev = np.abs(vals / target - 1.0)
+    return {"max_pct": 100 * float(dev.max()), "mean_pct": 100 * float(dev.mean()),
+            "n_points": int(inside.sum())}
+
+
 def laplace_spectrum(u, basis, samples, weights=None):
     """Torus-invariant scalar Laplacian eigenvalues of the metric with
     symplectic potential `u`, in the span of `basis` (s -> (m,) values).

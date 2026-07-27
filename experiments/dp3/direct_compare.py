@@ -10,6 +10,8 @@ in our matched U, and compare X1, X2.
 
 Usage: PYTHONPATH=. python experiments/dp3/direct_compare.py
 """
+from pathlib import Path
+
 import jax
 import jax.numpy as jnp
 import matplotlib
@@ -18,37 +20,26 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.linalg import eigh
-from scipy.optimize import minimize
 
 from sugrasol.cone import B_DP3, dp3
+from sugrasol.artifacts import load_psi_dp3
 from sugrasol.laplacian import slice_potential
 from sugrasol.ypq import (
-    _monomials, _poly_powers, cone_potential, dihedral_matrices, loss_fn,
-    residual_on_slice, sample_slice, slice_chart, sym_ortho_psi, t_of_s,
-    whiten_sym_poly,
+    _monomials, _poly_powers, dihedral_matrices, sample_slice, slice_chart,
+    t_of_s,
 )
 
 jax.config.update("jax_enable_x64", True)
 BLUE, RED = "#4c72b0", "#c44e52"
 
-ch = slice_chart(dp3(), B_DP3)
+# ---- the persisted D6-invariant metric (deg 14); no refit, so that this
+# figure and the quoted numbers cannot drift from the artifact
+NPZ = Path(__file__).resolve().parents[1] / "dp3smooth" / "dp3_G_deg14.npz"
+psi, ch, dat = load_psi_dp3(NPZ)
 group = dihedral_matrices(ch.verts_s)
 verts = np.array(ch.verts_s)
-
-# ---- train the D6-invariant metric (deg 14)
-ss = sample_slice(jax.random.PRNGKey(1), ch, 2048, eps=2e-3)
-powers, W, grp = whiten_sym_poly(14, ss, group)
-nc = W.shape[1]
-vg = jax.jit(jax.value_and_grad(
-    lambda v: loss_fn(ch, sym_ortho_psi(v[:nc], powers, W, grp), v[nc], ss)))
-r0 = jax.vmap(lambda s: residual_on_slice(ch, lambda s: 0.0, s))(ss)
-v0 = np.zeros(nc + 1); v0[nc] = -float(jnp.mean(r0))
-res = minimize(lambda v: (lambda l, g: (float(l), np.asarray(g)))(*vg(jnp.asarray(v))),
-               v0, jac=True, method="L-BFGS-B",
-               options=dict(maxiter=20000, ftol=1e-18, gtol=1e-16))
-v = jnp.asarray(res.x)
-psi = sym_ortho_psi(v[:nc], powers, W, grp)
-print(f"trained loss {res.fun:.2e}")
+print(f"deg-{int(dat['degree'])} metric: {dat['W'].shape[1]} params, "
+      f"held-out loss {float(dat['loss_test']):.2e}")
 
 # ---- our D6-invariant quadratic U(s), normalized U=0 centre, U=1 at vertices
 G = np.array(group)

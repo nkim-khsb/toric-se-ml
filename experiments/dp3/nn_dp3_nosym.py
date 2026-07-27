@@ -33,7 +33,8 @@ import optax
 from scipy.optimize import minimize
 
 from sugrasol.cone import B_DP3, dp3
-from sugrasol.laplacian import laplace_spectrum, polygon_quadrature, slice_potential
+from sugrasol.laplacian import (abreu_grid, laplace_spectrum,
+                                polygon_quadrature, slice_potential)
 from sugrasol.nets import init_mlp, mlp
 from sugrasol.ypq import (
     _monomials, _poly_powers, dihedral_matrices, gauge_fixed, loss_fn,
@@ -112,8 +113,13 @@ def abreu_S(psi, s):
 
 ss_e = sample_slice(jax.random.PRNGKey(11), chart, 200, eps=1e-2)
 S_nn = jax.vmap(lambda s: abreu_S(psi_nn, s))(ss_e)
-print(f"\nAbreu S (NN, no D6): [{float(jnp.min(S_nn)):.4f}, {float(jnp.max(S_nn)):.4f}]  "
-      f"dev {float(jnp.max(jnp.abs(S_nn - 12)) / 12):.2e}")
+print(f"\nAbreu S (NN, no D6), 200-point MC: [{float(jnp.min(S_nn)):.4f}, "
+      f"{float(jnp.max(S_nn)):.4f}]  dev {float(jnp.max(jnp.abs(S_nn - 12)) / 12):.2e}")
+
+# Same 240x240 grid estimator the polynomial is graded with (figures.py); see the
+# note in nn_dp3.py -- a 200-point sample maximum understates the worst deviation.
+print("Abreu S (NN, no D6) on the 240x240 grid:", abreu_grid(psi_nn, chart),
+      flush=True)
 
 vnn = jax.vmap(psi_nn)(ss_te)
 vpoly = jax.vmap(psi_poly)(ss_te)
