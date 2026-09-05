@@ -1,8 +1,7 @@
 # toric-se-ml
 
-Code accompanying **"Machine-learned toric Sasaki--Einstein metrics: a
-validated pipeline with two-sided sensitivity"** (N. Kim, submitted to
-*Machine Learning: Science and Technology*).
+Code accompanying **"Learning Toric Sasaki--Einstein metrics"**, by Nakwoo
+Kim, Sejin Kim and Hoseob Shin (in preparation).
 
 This repository contains exactly the code the paper's results depend on: a
 pipeline that learns the symplectic potential of a toric Ricci-flat Kähler

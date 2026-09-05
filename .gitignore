@@ -12,3 +12,4 @@ __pycache__/
 *.synctex.gz
 *.bbl
 *.blg
+experiments/dp3/figures_cache.npz
