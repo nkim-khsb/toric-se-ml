@@ -1,0 +1,69 @@
+========================================================================================
+(A) EIGHT-SEED ENSEMBLE -- direct training, cap 6000 (comparable to the paper's n=3)
+========================================================================================
+  seed 0: init defect 2.578  ->  held-out 6.2058e-07  defect 7.4888e-03   (6000 it)   40s
+  seed 1: init defect 2.304  ->  held-out 2.7290e-06  defect 1.7247e-02   (6000 it)   72s
+  seed 2: init defect 2.684  ->  held-out 3.5376e-06  defect 1.8583e-02   (6000 it)   104s
+  seed 3: init defect 3.614  ->  held-out 4.5578e-07  defect 3.3150e-03   (6000 it)   135s
+  seed 4: init defect 2.203  ->  held-out 3.3036e-07  defect 4.4105e-03   (6000 it)   166s
+  seed 5: init defect 1.963  ->  held-out 3.7278e-07  defect 3.8583e-03   (6000 it)   197s
+  seed 6: init defect 2.489  ->  held-out 3.3042e-07  defect 3.5441e-03   (6000 it)   228s
+  seed 7: init defect 2.236  ->  held-out 1.8988e-06  defect 1.4141e-02   (6000 it)   258s
+
+  n = 8
+  initial defect : mean 2.509  (paper's 3-seed average: 2.52)
+  final defect   : mean 9.074e-03 +- 6.5e-03   range 3.315e-03 .. 1.858e-02
+                   (paper quotes 1.4e-2 +- 0.5e-2 from n=3)
+  collapse       : 277x   (paper: 175x)
+  held-out       : range 3.304e-07 .. 3.538e-06  (spread 10.7x)
+
+========================================================================================
+(B) KICK SWEEP -- recovery probability vs kick magnitude
+    RECOVERED iff restored held < 10x direct held AND restored defect < 10x direct
+========================================================================================
+  rel 0.10 seed 0: kicked held 6.53e-02 defect 0.84  ->  restored held 4.595e-07 defect 5.806e-03   RECOVERED  (below direct)   284s
+  rel 0.10 seed 1: kicked held 8.10e-02 defect 0.40  ->  restored held 2.253e-06 defect 1.587e-02   RECOVERED  (below direct)   309s
+  rel 0.10 seed 2: kicked held 4.02e-02 defect 1.63  ->  restored held 4.140e-07 defect 3.792e-03   RECOVERED  (below direct)   335s
+  rel 0.10 seed 3: kicked held 5.58e-02 defect 1.69  ->  restored held 4.428e-07 defect 3.516e-03   RECOVERED  (below direct)   360s
+  -> rel 0.10: recovered 4/4   of which below direct: 4
+
+  rel 0.25 seed 0: kicked held 7.23e-01 defect 1.42  ->  restored held 4.548e-07 defect 5.551e-03   RECOVERED  (below direct)   386s
+  rel 0.25 seed 1: kicked held 9.82e-01 defect 0.61  ->  restored held 8.294e-07 defect 5.834e-03   RECOVERED  (below direct)   411s
+  rel 0.25 seed 2: kicked held 1.97e-01 defect 2.24  ->  restored held 4.224e-07 defect 4.291e-03   RECOVERED  (below direct)   437s
+  rel 0.25 seed 3: kicked held 1.66e-01 defect 2.82  ->  restored held 4.787e-07 defect 4.735e-03   RECOVERED   462s
+  -> rel 0.25: recovered 4/4   of which below direct: 3
+
+  rel 0.50 seed 0: kicked held 2.91e+00 defect 1.79  ->  restored held 3.700e-07 defect 4.359e-03   RECOVERED  (below direct)   487s
+  rel 0.50 seed 1: kicked held 4.71e+00 defect 0.81  ->  restored held 5.194e-01 defect 1.057e+00   failed      513s
+  rel 0.50 seed 2: kicked held 3.54e+00 defect 2.34  ->  restored held 1.728e-07 defect 2.634e-03   RECOVERED  (below direct)   538s
+  rel 0.50 seed 3: kicked held 1.73e-01 defect 2.89  ->  restored held 4.532e-07 defect 3.165e-03   RECOVERED  (below direct)   563s
+  -> rel 0.50: recovered 3/4   of which below direct: 3
+
+  rel 0.75 seed 0: kicked held 1.18e+00 defect 1.90  ->  restored held 3.853e-01 defect 2.507e+00   failed      590s
+  rel 0.75 seed 1: kicked held 2.52e+00 defect 1.03  ->  restored held 3.842e-07 defect 4.038e-03   RECOVERED  (below direct)   615s
+  rel 0.75 seed 2: kicked held 1.64e+00 defect 2.25  ->  restored held 1.076e-07 defect 1.944e-03   RECOVERED  (below direct)   641s
+  rel 0.75 seed 3: kicked held 3.82e-01 defect 2.34  ->  restored held 3.960e-07 defect 2.891e-03   RECOVERED  (below direct)   668s
+  -> rel 0.75: recovered 3/4   of which below direct: 3
+
+  rel 1.00 seed 0: kicked held 7.95e-01 defect 2.01  ->  restored held 2.008e-01 defect 2.578e+00   failed      693s
+  rel 1.00 seed 1: kicked held 3.17e+00 defect 1.44  ->  restored held 3.459e-07 defect 3.572e-03   RECOVERED  (below direct)   718s
+  rel 1.00 seed 2: kicked held 2.54e+00 defect 2.29  ->  restored held 4.325e-01 defect 2.266e+00   failed      743s
+  rel 1.00 seed 3: kicked held 4.64e-01 defect 2.26  ->  restored held 4.984e-07 defect 5.948e-03   RECOVERED   769s
+  -> rel 1.00: recovered 2/4   of which below direct: 1
+
+========================================================================================
+PRE-REGISTERED VERDICT
+========================================================================================
+    kick    recovered   fraction   below direct
+    0.10          4/4       1.00              4
+    0.25          4/4       1.00              3
+    0.50          3/4       0.75              3
+    0.75          3/4       0.75              3
+    1.00          2/4       0.50              1
+
+  monotone decreasing in kick magnitude: True
+  fraction at smallest kick 0.10: 1.00   at largest 1.00: 0.50
+  => the paper's 'presumably' sentence is NOT confirmed as stated;
+     report the curve and weaken the sentence accordingly.
+
+total 769s

@@ -1,0 +1,55 @@
+
+=== dP3 (hexagon), D = 16, trial dim 69, k = d-3 = 3 ===
+  S = (M+T)/2 identity: max deviation 2.3e-08
+  |eig T| sorted: 1.00e+00  1.00e+00  1.00e+00  4.57e-09  6.74e-10  5.35e-10   gap at k: 2.2e+08
+  the k largest eigenvalues of T: -1.0000  -1.0000  -1.0000   (all negative = primitive classes negative definite)
+  kernel E: 1.171e-09  1.171e-09  5.563e-09   harmonic distance sqrt(2E): 4.84e-05  4.84e-05  1.05e-04
+  quadrature table, fixed kernel vectors (dP3, D = 16):
+   ngl |          N_0      den_0        E_0 |          N_1      den_1        E_1 |          N_2      den_2        E_2
+    24 | 1.171350e-09  1.0000000 1.1714e-09 | 1.171350e-09  1.0000000 1.1714e-09 | 5.562586e-09  1.0000000 5.5626e-09
+    48 | 1.171350e-09  1.0000000 1.1714e-09 | 1.171350e-09  1.0000000 1.1714e-09 | 5.562586e-09  1.0000000 5.5626e-09
+    96 | 1.171350e-09  1.0000000 1.1714e-09 | 1.171350e-09  1.0000000 1.1714e-09 | 5.562586e-09  1.0000000 5.5626e-09
+   128 | 1.171350e-09  1.0000000 1.1714e-09 | 1.171350e-09  1.0000000 1.1714e-09 | 5.562586e-09  1.0000000 5.5626e-09
+
+=== dP3 (hexagon), D = 20, trial dim 123, k = d-3 = 3 ===
+  S = (M+T)/2 identity: max deviation 8.1e-05
+  |eig T| sorted: 1.00e+00  1.00e+00  1.00e+00  8.21e-06  4.10e-06  1.63e-06   gap at k: 1.2e+05
+  the k largest eigenvalues of T: -1.0000  -1.0000  -1.0000   (all negative = primitive classes negative definite)
+  kernel E: 2.454e-12  2.454e-12  1.236e-11   harmonic distance sqrt(2E): 2.22e-06  2.22e-06  4.97e-06
+  quadrature table, fixed kernel vectors (dP3, D = 20):
+   ngl |          N_0      den_0        E_0 |          N_1      den_1        E_1 |          N_2      den_2        E_2
+    24 | 2.454048e-12  1.0000000 2.4540e-12 | 2.454048e-12  1.0000000 2.4540e-12 | 1.236379e-11  1.0000000 1.2364e-11
+    48 | 2.454048e-12  1.0000000 2.4540e-12 | 2.454048e-12  1.0000000 2.4540e-12 | 1.236379e-11  1.0000000 1.2364e-11
+    96 | 2.454048e-12  1.0000000 2.4540e-12 | 2.454048e-12  1.0000000 2.4540e-12 | 1.236379e-11  1.0000000 1.2364e-11
+   128 | 2.454048e-12  1.0000000 2.4540e-12 | 2.454048e-12  1.0000000 2.4540e-12 | 1.236379e-11  1.0000000 1.2364e-11
+  b* = (np.float64(3.0), np.float64(-0.0), np.float64(0.331184))   vol = 0.251420 pi^3
+  SE fit, degree 14 (117 params): train 3.218e-14  held-out 6.041e-14   (paper: 6.04e-14)
+
+=== dP2 (pentagon) at b*, D = 16, trial dim 80, k = d-3 = 2 ===
+  S = (M+T)/2 identity: max deviation 1.0e-05
+  |eig T| sorted: 1.00e+00  1.00e+00  7.97e-07  2.51e-07  4.14e-08   gap at k: 1.3e+06
+  the k largest eigenvalues of T: -1.0000  -1.0000   (all negative = primitive classes negative definite)
+  kernel E: 1.387e-10  5.722e-10   harmonic distance sqrt(2E): 1.67e-05  3.38e-05
+  quadrature table, fixed kernel vectors (dP2, D = 16):
+   ngl |          N_0      den_0        E_0 |          N_1      den_1        E_1
+    24 | 1.386958e-10  1.0000000 1.3870e-10 | 5.722118e-10  1.0000000 5.7221e-10
+    48 | 1.386958e-10  1.0000000 1.3870e-10 | 5.722118e-10  1.0000000 5.7221e-10
+    96 | 1.386958e-10  1.0000000 1.3870e-10 | 5.722118e-10  1.0000000 5.7221e-10
+   128 | 1.386958e-10  1.0000000 1.3870e-10 | 5.722118e-10  1.0000000 5.7221e-10
+
+=== Y^{3,2}, D = 16, trial dim 92, k = d-3 = 1 ===
+  S = (M+T)/2 identity: max deviation 3.8e-03
+  |eig T| sorted: 1.00e+00  7.15e-04  3.50e-04  1.36e-04   gap at k: 1.4e+03
+  the k largest eigenvalues of T: -1.0000   (all negative = primitive classes negative definite)
+  kernel E: 4.227e-18   harmonic distance sqrt(2E): 2.91e-09
+  quadrature table, fixed kernel vectors (Y32, D = 16):
+   ngl |          N_0      den_0        E_0
+    24 | 4.227415e-18  1.0000000 4.2274e-18
+    48 | 4.227415e-18  1.0000000 4.2274e-18
+    96 | 4.227415e-18  1.0000000 4.2274e-18
+
+=== conifold, D = 8, trial dim 16, k = d-3 = 1 ===
+  S = (M+T)/2 identity: max deviation 3.2e-14
+  |eig T| sorted: 1.00e+00  2.41e-14  2.39e-14  1.88e-14   gap at k: 4.1e+13
+  the k largest eigenvalues of T: -1.0000   (all negative = primitive classes negative definite)
+  kernel E: 1.968e-29   harmonic distance sqrt(2E): 6.27e-15

@@ -1,0 +1,30 @@
+
+==============================================================================
+Y^2,1  degree 8, orthonormal basis -- retrain from psi=0 on this build
+==============================================================================
+  42 params, 4096 samples; psi=0 residual spread 0.2895
+  train 5.517e-13   held-out 6.019e-13   (513 it, converged: CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR)   14s
+  paper: train 5.6e-13  held-out 6.1e-13   -> held-out ratio 0.99x
+  sup|psi| on held-out sample: 2.8990e-02
+  GMSW deviation: SKIPPED (TypeError: cone6() takes 1 positional argument but 2 were given)
+
+  Abreu -- estimator section 3 used (MC 400): max 0.0059%  mean 0.00127%   (paper 0.006%)
+  Abreu -- grid n=120: max 0.0128%  mean 0.00143%  [  6583 pts]  = 2.16x the MC max   34s
+  Abreu -- grid n=240: max 0.0151%  mean 0.00141%  [ 26416 pts]  = 2.55x the MC max   38s
+  Abreu -- grid n=360: max 0.0116%  mean 0.00137%  [ 59390 pts]  = 1.95x the MC max   43s
+
+==============================================================================
+Y^3,2  degree 12, orthonormal basis -- retrain from psi=0 on this build
+==============================================================================
+  88 params, 4096 samples; psi=0 residual spread 0.6023
+  train 1.761e-14   held-out 2.005e-14   (1244 it, converged: CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR)   85s
+  paper: train 2.0e-14  held-out 2.0e-14   -> held-out ratio 1.00x
+  sup|psi| on held-out sample: 5.5006e-02
+  GMSW deviation: SKIPPED (TypeError: cone6() takes 1 positional argument but 2 were given)
+
+  Abreu -- estimator section 3 used (MC 400): max 0.0033%  mean 0.00043%   (paper 0.004%)
+  Abreu -- grid n=120: max 0.0055%  mean 0.00048%  [  6424 pts]  = 1.66x the MC max   108s
+  Abreu -- grid n=240: max 0.0078%  mean 0.00048%  [ 25976 pts]  = 2.32x the MC max   119s
+  Abreu -- grid n=360: max 0.0086%  mean 0.00048%  [ 58353 pts]  = 2.57x the MC max   131s
+
+total 131s

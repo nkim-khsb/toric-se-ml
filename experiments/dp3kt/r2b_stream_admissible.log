@@ -1,0 +1,164 @@
+
+=== conifold (square): d = 4, expected kernel d-3 = 1 ===
+  [A] admissible trial space (affine trace on every edge), ngl = 48
+  dim = (D-d+2)(D-d+1)/2 [forms with all periods zero] + realizers [<= d-3]; svgap = constraint-matrix singular-value gap at the cut
+    D    K  dim zero real   svgap rank | lowest 3 SD eigenvalues          | gap
+    8   42   16   15    1 9.1e+13   16 |  1.28e-15   5.00e-01   5.00e-01 |  3.9e+14x
+   12   88   46   45    1 5.6e+11   46 | -4.72e-16   5.00e-01   5.00e-01 |      infx
+   16  150   92   91    1 4.9e+09   92 | -1.69e-16   5.00e-01   5.00e-01 |      infx
+
+  [U] unconstrained trial space (all monomials), D = 16, ngl = 48
+  K = 150, rank 150 |  5.77e-16   1.08e-01   1.11e-01 |  1.9e+14x
+  edge-trace defect max|chi_tt|/max|Hess chi|, kernel vectors then first non-kernel:
+     unconstrained: 3.81e-14  7.75e-02
+     admissible   : 3.30e-08  2.72e-09   (zero up to roundoff by construction)
+
+  quadrature scan, D = 16, coefficient vectors fixed at ngl = 48:
+   ngl |      num_0      den_0        E_0 |  first non-kernel E
+  -- unconstrained
+    12 |  1.090e-29  1.000e+00  1.090e-29 |  2.429e-02
+    16 |  1.292e-29  1.000e+00  1.292e-29 |  4.431e-02
+    24 |  1.763e-29  1.000e+00  1.763e-29 |  7.001e-02
+    32 |  2.304e-29  1.000e+00  2.304e-29 |  8.668e-02
+    48 |  3.505e-29  1.000e+00  3.505e-29 |  1.082e-01
+    64 |  5.943e-29  1.000e+00  5.943e-29 |  1.222e-01
+    96 |  1.913e-28  1.000e+00  1.913e-28 |  1.404e-01
+   128 |  6.944e-28  1.000e+00  6.944e-28 |  1.523e-01
+     relative change ngl 24->128: den 3.1e-14 ; num 3.8e+01
+     numerator last step ngl 96->128: 2.6e+00
+  -- admissible
+    12 |  6.303e-19  1.000e+00  6.303e-19 |  5.001e-01
+    16 |  8.718e-19  1.000e+00  8.718e-19 |  5.000e-01
+    24 |  1.215e-18  1.000e+00  1.215e-18 |  5.000e-01
+    32 |  1.460e-18  1.000e+00  1.460e-18 |  5.000e-01
+    48 |  1.806e-18  1.000e+00  1.806e-18 |  5.000e-01
+    64 |  2.053e-18  1.000e+00  2.053e-18 |  5.000e-01
+    96 |  2.401e-18  1.000e+00  2.401e-18 |  5.000e-01
+   128 |  2.649e-18  1.000e+00  2.649e-18 |  5.000e-01
+     relative change ngl 24->128: den 8.9e-16 ; num 1.2e+00
+     numerator last step ngl 96->128: 1.0e-01
+
+=== Y^{3,2}: d = 4, expected kernel d-3 = 1, HEK R = 11.898979 ===
+  [A] admissible trial space (affine trace on every edge), ngl = 48
+  dim = (D-d+2)(D-d+1)/2 [forms with all periods zero] + realizers [<= d-3]; svgap = constraint-matrix singular-value gap at the cut
+    D    K  dim zero real   svgap rank | lowest 3 SD eigenvalues          | gap   R (HEK)
+    8   42   15   15    0 1.7e+12   15 |  5.00e-01   5.00e-01   5.00e-01 |  1.0e+00x   2.193021 (8.2e-01, affine 4.5e-01)
+   12   88   45   45    0 6.1e+09   45 |  5.00e-01   5.00e-01   5.00e-01 |  1.0e+00x   2.508485 (7.9e-01, affine 4.0e-01)
+   16  150   91   91    0 2.4e+07   91 |  5.00e-01   5.00e-01   5.00e-01 |  1.0e+00x   5.350733 (5.5e-01, affine 4.1e-01)
+
+  [U] unconstrained trial space (all monomials), D = 16, ngl = 48
+  K = 150, rank 150 |  8.79e-12   1.06e-01   1.17e-01 |  1.2e+10x
+  edge-trace defect max|chi_tt|/max|Hess chi|, kernel vectors then first non-kernel:
+     unconstrained: 2.94e-05  4.36e-02
+     admissible   : 8.75e-07  4.96e-08   (zero up to roundoff by construction)
+
+  quadrature scan, D = 16, coefficient vectors fixed at ngl = 48:
+   ngl |      num_0      den_0        E_0 |  first non-kernel E
+  -- unconstrained
+    12 |  4.622e-12  1.000e+00  4.622e-12 |  2.138e-02
+    16 |  5.920e-12  1.000e+00  5.920e-12 |  4.159e-02
+    24 |  6.910e-12  1.000e+00  6.910e-12 |  6.771e-02
+    32 |  7.687e-12  1.000e+00  7.687e-12 |  8.464e-02
+    48 |  8.788e-12  1.000e+00  8.788e-12 |  1.065e-01
+    64 |  9.572e-12  1.000e+00  9.572e-12 |  1.207e-01
+    96 |  1.068e-11  1.000e+00  1.068e-11 |  1.391e-01
+   128 |  1.147e-11  1.000e+00  1.147e-11 |  1.511e-01
+     relative change ngl 24->128: den 9.1e-12 ; num 6.6e-01
+     numerator last step ngl 96->128: 7.4e-02
+  -- admissible
+    12 |  5.005e-01  9.990e-01  5.010e-01 |  5.018e-01
+    16 |  5.000e-01  1.000e+00  5.000e-01 |  5.000e-01
+    24 |  5.000e-01  1.000e+00  5.000e-01 |  5.000e-01
+    32 |  5.000e-01  1.000e+00  5.000e-01 |  5.000e-01
+    48 |  5.000e-01  1.000e+00  5.000e-01 |  5.000e-01
+    64 |  5.000e-01  1.000e+00  5.000e-01 |  5.000e-01
+    96 |  5.000e-01  1.000e+00  5.000e-01 |  5.000e-01
+   128 |  5.000e-01  1.000e+00  5.000e-01 |  5.000e-01
+     relative change ngl 24->128: den 1.3e-11 ; num 5.6e-11
+     numerator last step ngl 96->128: 7.1e-12
+
+=== dP3 (hexagon): d = 6, expected kernel d-3 = 3 ===
+  [A] admissible trial space (affine trace on every edge), ngl = 48
+  dim = (D-d+2)(D-d+1)/2 [forms with all periods zero] + realizers [<= d-3]; svgap = constraint-matrix singular-value gap at the cut
+    D    K  dim zero real   svgap rank | lowest 5 SD eigenvalues                                | gap
+    8   42    6    6    0 8.2e+10    6 |  5.00e-01   5.00e-01   5.00e-01   5.00e-01   5.00e-01 |  1.0e+00x
+   12   88   28   28    0 2.3e+06   28 |  5.00e-01   5.00e-01   5.00e-01   5.00e-01   5.00e-01 |  1.0e+00x
+   16  150   69   66    3 1.2e+05   69 |  7.74e-10   7.74e-10   3.42e-09   5.00e-01   5.00e-01 |  1.5e+08x
+   20  228  123  120    3 3.1e+03  123 |  2.01e-12   2.02e-12   9.70e-12   5.00e-01   5.00e-01 |  5.2e+10x
+
+  [U] unconstrained trial space (all monomials), D = 16, ngl = 48
+  K = 150, rank 150 |  6.15e-11   6.15e-11   3.19e-10   1.16e-01   1.23e-01 |  3.6e+08x
+  edge-trace defect max|chi_tt|/max|Hess chi|, kernel vectors then first non-kernel:
+     unconstrained: 2.20e-05  1.96e-05  3.92e-05  7.52e-02
+     admissible   : 1.85e-09  2.90e-09  5.67e-09  4.95e-10   (zero up to roundoff by construction)
+
+  quadrature scan, D = 16, coefficient vectors fixed at ngl = 48:
+   ngl |      num_0      den_0        E_0 |      num_1      den_1        E_1 |      num_2      den_2        E_2 |  first non-kernel E
+  -- unconstrained
+    12 |  4.839e-11  1.000e+00  4.839e-11 |  4.839e-11  1.000e+00  4.839e-11 |  2.601e-10  1.000e+00  2.601e-10 |  2.951e-02
+    16 |  5.279e-11  1.000e+00  5.279e-11 |  5.279e-11  1.000e+00  5.279e-11 |  2.746e-10  1.000e+00  2.746e-10 |  5.008e-02
+    24 |  5.596e-11  1.000e+00  5.596e-11 |  5.596e-11  1.000e+00  5.596e-11 |  2.908e-10  1.000e+00  2.908e-10 |  7.682e-02
+    32 |  5.823e-11  1.000e+00  5.823e-11 |  5.823e-11  1.000e+00  5.823e-11 |  3.023e-10  1.000e+00  3.023e-10 |  9.407e-02
+    48 |  6.145e-11  1.000e+00  6.145e-11 |  6.145e-11  1.000e+00  6.145e-11 |  3.187e-10  1.000e+00  3.187e-10 |  1.162e-01
+    64 |  6.374e-11  1.000e+00  6.374e-11 |  6.374e-11  1.000e+00  6.374e-11 |  3.304e-10  1.000e+00  3.304e-10 |  1.306e-01
+    96 |  6.699e-11  1.000e+00  6.699e-11 |  6.699e-11  1.000e+00  6.699e-11 |  3.469e-10  1.000e+00  3.469e-10 |  1.492e-01
+   128 |  6.929e-11  1.000e+00  6.929e-11 |  6.929e-11  1.000e+00  6.929e-11 |  3.586e-10  1.000e+00  3.586e-10 |  1.613e-01
+     relative change ngl 24->128: den 2.7e-11 2.7e-11 1.4e-10 ; num 2.4e-01 2.4e-01 2.3e-01
+     numerator last step ngl 96->128: 3.4e-02 3.4e-02 3.4e-02
+  -- admissible
+    12 |  7.708e-10  1.000e+00  7.708e-10 |  7.708e-10  1.000e+00  7.708e-10 |  3.416e-09  1.000e+00  3.416e-09 |  5.000e-01
+    16 |  7.738e-10  1.000e+00  7.738e-10 |  7.738e-10  1.000e+00  7.738e-10 |  3.420e-09  1.000e+00  3.420e-09 |  5.000e-01
+    24 |  7.738e-10  1.000e+00  7.738e-10 |  7.738e-10  1.000e+00  7.738e-10 |  3.420e-09  1.000e+00  3.420e-09 |  5.000e-01
+    32 |  7.738e-10  1.000e+00  7.738e-10 |  7.738e-10  1.000e+00  7.738e-10 |  3.420e-09  1.000e+00  3.420e-09 |  5.000e-01
+    48 |  7.738e-10  1.000e+00  7.738e-10 |  7.738e-10  1.000e+00  7.738e-10 |  3.420e-09  1.000e+00  3.420e-09 |  5.000e-01
+    64 |  7.738e-10  1.000e+00  7.738e-10 |  7.738e-10  1.000e+00  7.738e-10 |  3.420e-09  1.000e+00  3.420e-09 |  5.000e-01
+    96 |  7.738e-10  1.000e+00  7.738e-10 |  7.738e-10  1.000e+00  7.738e-10 |  3.420e-09  1.000e+00  3.420e-09 |  5.000e-01
+   128 |  7.738e-10  1.000e+00  7.738e-10 |  7.738e-10  1.000e+00  7.738e-10 |  3.420e-09  1.000e+00  3.420e-09 |  5.000e-01
+     relative change ngl 24->128: den 4.1e-14 4.0e-15 9.1e-15 ; num 2.3e-09 3.0e-09 1.5e-08
+     numerator last step ngl 96->128: 4.0e-10 5.1e-10 2.7e-09
+
+--- refitting the dP2 SE potential at b* (no stored artifact) ---
+  b* = (np.float64(3.0), np.float64(-0.0), np.float64(0.331184))   vol = 0.251420 pi^3
+  SE fit, degree 14 (117 params): train 3.218e-14  held-out 6.041e-14   (paper: 6.04e-14)
+  gate (0) same solution as tab:dp2ladder: held-out 6.04e-14 vs 6.04e-14: PASS
+
+=== dP2 (pentagon) at b*: d = 5, expected kernel d-3 = 2 ===
+  [A] admissible trial space (affine trace on every edge), ngl = 48
+  dim = (D-d+2)(D-d+1)/2 [forms with all periods zero] + realizers [<= d-3]; svgap = constraint-matrix singular-value gap at the cut
+    D    K  dim zero real   svgap rank | lowest 4 SD eigenvalues                     | gap
+    8   42   10   10    0 2.3e+10   10 |  5.00e-01   5.00e-01   5.00e-01   5.00e-01 |  1.0e+00x
+   12   88   36   36    0 5.7e+04   36 |  5.00e-01   5.00e-01   5.00e-01   5.00e-01 |  1.0e+00x
+   16  150   80   78    2 2.0e+05   80 |  1.65e-10   5.98e-10   5.00e-01   5.00e-01 |  8.4e+08x
+
+  [U] unconstrained trial space (all monomials), D = 16, ngl = 48
+  K = 150, rank 150 |  1.92e-11   7.73e-11   1.11e-01   1.11e-01 |  1.4e+09x
+  edge-trace defect max|chi_tt|/max|Hess chi|, kernel vectors then first non-kernel:
+     unconstrained: 2.62e-05  5.42e-05  1.30e-01
+     admissible   : 1.16e-07  3.75e-08  1.56e-08   (zero up to roundoff by construction)
+
+  quadrature scan, D = 16, coefficient vectors fixed at ngl = 48:
+   ngl |      num_0      den_0        E_0 |      num_1      den_1        E_1 |  first non-kernel E
+  -- unconstrained
+    12 |  1.533e-11  1.000e+00  1.533e-11 |  6.162e-11  1.000e+00  6.162e-11 |  2.314e-02
+    16 |  1.633e-11  1.000e+00  1.633e-11 |  6.537e-11  1.000e+00  6.537e-11 |  4.410e-02
+    24 |  1.740e-11  1.000e+00  1.740e-11 |  6.974e-11  1.000e+00  6.974e-11 |  7.107e-02
+    32 |  1.816e-11  1.000e+00  1.816e-11 |  7.288e-11  1.000e+00  7.288e-11 |  8.848e-02
+    48 |  1.925e-11  1.000e+00  1.925e-11 |  7.733e-11  1.000e+00  7.733e-11 |  1.109e-01
+    64 |  2.002e-11  1.000e+00  2.002e-11 |  8.049e-11  1.000e+00  8.049e-11 |  1.254e-01
+    96 |  2.111e-11  1.000e+00  2.111e-11 |  8.496e-11  1.000e+00  8.496e-11 |  1.441e-01
+   128 |  2.189e-11  1.000e+00  2.189e-11 |  8.813e-11  1.000e+00  8.813e-11 |  1.563e-01
+     relative change ngl 24->128: den 9.0e-12 3.7e-11 ; num 2.6e-01 2.6e-01
+     numerator last step ngl 96->128: 3.7e-02 3.7e-02
+  -- admissible
+    12 |  1.651e-10  1.000e+00  1.651e-10 |  5.993e-10  1.000e+00  5.993e-10 |  5.000e-01
+    16 |  1.648e-10  1.000e+00  1.648e-10 |  5.983e-10  1.000e+00  5.983e-10 |  5.000e-01
+    24 |  1.648e-10  1.000e+00  1.648e-10 |  5.983e-10  1.000e+00  5.983e-10 |  5.000e-01
+    32 |  1.648e-10  1.000e+00  1.648e-10 |  5.983e-10  1.000e+00  5.983e-10 |  5.000e-01
+    48 |  1.648e-10  1.000e+00  1.648e-10 |  5.983e-10  1.000e+00  5.983e-10 |  5.000e-01
+    64 |  1.648e-10  1.000e+00  1.648e-10 |  5.983e-10  1.000e+00  5.983e-10 |  5.000e-01
+    96 |  1.648e-10  1.000e+00  1.648e-10 |  5.983e-10  1.000e+00  5.983e-10 |  5.000e-01
+   128 |  1.648e-10  1.000e+00  1.648e-10 |  5.983e-10  1.000e+00  5.983e-10 |  5.000e-01
+     relative change ngl 24->128: den 6.1e-15 2.6e-14 ; num 3.1e-06 1.4e-07
+     numerator last step ngl 96->128: 5.4e-07 2.5e-08
+
+FAILURES: ['(P2) conifold (square): gap does not grow with D: [np.float64(391617358909102.3), np.float64(-1059670465558395.0), np.float64(-2961300520631552.0)]', '(P2) Y^{3,2} D=8: fewer than 1 collapsed (gap 1.0e+00)', '(P2) Y^{3,2} D=12: fewer than 1 collapsed (gap 1.0e+00)', '(P2) Y^{3,2} D=16: fewer than 1 collapsed (gap 1.0e+00)', '(P2) dP3 (hexagon) D=8: fewer than 3 collapsed (gap 1.0e+00)', '(P2) dP3 (hexagon) D=12: fewer than 3 collapsed (gap 1.0e+00)', '(P2) dP2 (pentagon) at b* D=8: fewer than 2 collapsed (gap 1.0e+00)', '(P2) dP2 (pentagon) at b* D=12: fewer than 2 collapsed (gap 1.0e+00)']   (319 s)

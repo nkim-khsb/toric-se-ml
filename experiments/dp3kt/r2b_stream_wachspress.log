@@ -1,0 +1,96 @@
+
+=== conifold (square): d = 4, kernel d-3 = 1 ===
+  intersection-point conditions on vertex data: 0 conditions, rank 0; data surviving = 4 (affine = 3) => exactly admissible POLYNOMIALS carry 1 vertex directions
+  Wachspress + prod(ell)*poly space, ngl = 48:
+    D    K rank pred | lowest 3 SD eigenvalues          | gap
+    4    2    2    2 |  1.97e-29   5.00e-01 |  2.5e+28x
+    8   16   16   16 |  1.97e-29   5.00e-01   5.00e-01 |  2.5e+28x
+   12   46   46   46 |  1.97e-29   5.00e-01   5.00e-01 |  2.5e+28x
+   16   92   92   92 |  1.97e-29   5.00e-01   5.00e-01 |  2.5e+28x
+  edge-trace defect (kernel vectors, then first non-kernel): 1.0e-15  9.7e-13   (exact zero up to roundoff)
+
+  quadrature scan, D = 16, coefficient vectors fixed at ngl = 48:
+   ngl |      num_0      den_0 |  first non-kernel E
+    12 | 1.8020e-31 1.0000e+00 | 4.9961e-01
+    16 | 3.8711e-31 1.0000e+00 | 5.0000e-01
+    24 | 1.2048e-30 1.0000e+00 | 5.0000e-01
+    32 | 2.3453e-30 1.0000e+00 | 5.0000e-01
+    48 | 8.7752e-30 1.0000e+00 | 5.0000e-01
+    64 | 4.9588e-29 1.0000e+00 | 5.0000e-01
+    96 | 1.8547e-28 1.0000e+00 | 5.0000e-01
+   128 | 6.1622e-28 1.0000e+00 | 5.0000e-01
+     relative change ngl 24->128: num 5.1e+02 ; den 3.3e-14
+
+=== Y^{3,2}: d = 4, kernel d-3 = 1, HEK R = 11.898979 ===
+  intersection-point conditions on vertex data: 1 conditions, rank 1; data surviving = 3 (affine = 3) => exactly admissible POLYNOMIALS carry 0 vertex directions
+  Wachspress + prod(ell)*poly space, ngl = 48:
+    D    K rank pred | lowest 3 SD eigenvalues          | gap   R (HEK)
+    4    2    2    2 |  6.29e-16   5.00e-01 |  8.0e+14x   11.898980 (1.4e-08, affine 1.8e-09)
+    8   16   16   16 |  4.95e-16   5.00e-01   5.00e-01 |  1.0e+15x   11.898979 (3.4e-09, affine 5.5e-09)
+   12   46   46   46 |  2.10e-16   5.00e-01   5.00e-01 |  2.4e+15x   11.898979 (3.0e-09, affine 9.9e-09)
+   16   92   92   92 |  4.23e-18   5.00e-01   5.00e-01 |  1.2e+17x   11.898979 (9.9e-10, affine 1.1e-08)
+  edge-trace defect (kernel vectors, then first non-kernel): 5.6e-16  7.4e-11   (exact zero up to roundoff)
+
+  quadrature scan, D = 16, coefficient vectors fixed at ngl = 48:
+   ngl |      num_0      den_0 |  first non-kernel E
+    12 | 4.1228e-18 1.0000e+00 | 5.0022e-01
+    16 | 4.2274e-18 1.0000e+00 | 5.0000e-01
+    24 | 4.2274e-18 1.0000e+00 | 5.0000e-01
+    32 | 4.2274e-18 1.0000e+00 | 5.0000e-01
+    48 | 4.2274e-18 1.0000e+00 | 5.0000e-01
+    64 | 4.2274e-18 1.0000e+00 | 5.0000e-01
+    96 | 4.2274e-18 1.0000e+00 | 5.0000e-01
+   128 | 4.2274e-18 1.0000e+00 | 5.0000e-01
+     relative change ngl 24->128: num 2.5e-08 ; den 1.6e-14
+
+=== dP3 (hexagon): d = 6, kernel d-3 = 3 ===
+  intersection-point conditions on vertex data: 6 conditions, rank 3; data surviving = 3 (affine = 3) => exactly admissible POLYNOMIALS carry 0 vertex directions
+  Wachspress + prod(ell)*poly space, ngl = 48:
+    D    K rank pred | lowest 5 SD eigenvalues                                | gap
+    6    4    4    4 |  1.36e-04   3.38e-04   3.38e-04   5.00e-01 |  1.5e+03x
+    8    9    9    9 |  6.87e-05   6.87e-05   1.36e-04   5.00e-01   5.00e-01 |  3.7e+03x
+   12   31   31   31 |  4.21e-07   4.21e-07   1.70e-06   5.00e-01   5.00e-01 |  2.9e+05x
+   16   69   69   69 |  1.17e-09   1.17e-09   5.56e-09   5.00e-01   5.00e-01 |  9.0e+07x
+   20  123  123  123 |  2.45e-12   2.45e-12   1.24e-11   5.00e-01   5.00e-01 |  4.0e+10x
+  edge-trace defect (kernel vectors, then first non-kernel): 4.6e-16  3.4e-16  5.0e-16  9.1e-15   (exact zero up to roundoff)
+
+  quadrature scan, D = 16, coefficient vectors fixed at ngl = 48:
+   ngl |      num_0      den_0 |      num_1      den_1 |      num_2      den_2 |  first non-kernel E
+    12 | 1.1685e-09 1.0000e+00 | 1.1685e-09 1.0000e+00 | 5.5598e-09 1.0000e+00 | 5.0000e-01
+    16 | 1.1714e-09 1.0000e+00 | 1.1714e-09 1.0000e+00 | 5.5626e-09 1.0000e+00 | 5.0000e-01
+    24 | 1.1714e-09 1.0000e+00 | 1.1714e-09 1.0000e+00 | 5.5626e-09 1.0000e+00 | 5.0000e-01
+    32 | 1.1714e-09 1.0000e+00 | 1.1714e-09 1.0000e+00 | 5.5626e-09 1.0000e+00 | 5.0000e-01
+    48 | 1.1714e-09 1.0000e+00 | 1.1714e-09 1.0000e+00 | 5.5626e-09 1.0000e+00 | 5.0000e-01
+    64 | 1.1714e-09 1.0000e+00 | 1.1714e-09 1.0000e+00 | 5.5626e-09 1.0000e+00 | 5.0000e-01
+    96 | 1.1714e-09 1.0000e+00 | 1.1714e-09 1.0000e+00 | 5.5626e-09 1.0000e+00 | 5.0000e-01
+   128 | 1.1714e-09 1.0000e+00 | 1.1714e-09 1.0000e+00 | 5.5626e-09 1.0000e+00 | 5.0000e-01
+     relative change ngl 24->128: num 1.6e-13 5.7e-13 1.2e-13 ; den 4.9e-15 2.4e-14 1.3e-14
+
+--- refitting the dP2 SE potential at b* ---
+  b* = (np.float64(3.0), np.float64(-0.0), np.float64(0.331184))   vol = 0.251420 pi^3
+  SE fit, degree 14 (117 params): train 3.218e-14  held-out 6.041e-14   (paper: 6.04e-14)
+  gate (0): held-out 6.04e-14 vs paper 6.04e-14: PASS
+
+=== dP2 (pentagon) at b*: d = 5, kernel d-3 = 2 ===
+  intersection-point conditions on vertex data: 5 conditions, rank 2; data surviving = 3 (affine = 3) => exactly admissible POLYNOMIALS carry 0 vertex directions
+  Wachspress + prod(ell)*poly space, ngl = 48:
+    D    K rank pred | lowest 4 SD eigenvalues                     | gap
+    5    3    3    3 |  7.48e-05   4.88e-04   5.00e-01 |  1.0e+03x
+    8   12   12   12 |  1.60e-05   6.32e-05   5.00e-01   5.00e-01 |  7.9e+03x
+   12   38   38   38 |  7.21e-08   2.86e-07   5.00e-01   5.00e-01 |  1.7e+06x
+   16   80   80   80 |  1.39e-10   5.72e-10   5.00e-01   5.00e-01 |  8.7e+08x
+  edge-trace defect (kernel vectors, then first non-kernel): 6.6e-16  5.2e-16  4.7e-12   (exact zero up to roundoff)
+
+  quadrature scan, D = 16, coefficient vectors fixed at ngl = 48:
+   ngl |      num_0      den_0 |      num_1      den_1 |  first non-kernel E
+    12 | 1.3894e-10 1.0000e+00 | 5.7330e-10 1.0000e+00 | 4.9997e-01
+    16 | 1.3870e-10 1.0000e+00 | 5.7221e-10 1.0000e+00 | 5.0000e-01
+    24 | 1.3870e-10 1.0000e+00 | 5.7221e-10 1.0000e+00 | 5.0000e-01
+    32 | 1.3870e-10 1.0000e+00 | 5.7221e-10 1.0000e+00 | 5.0000e-01
+    48 | 1.3870e-10 1.0000e+00 | 5.7221e-10 1.0000e+00 | 5.0000e-01
+    64 | 1.3870e-10 1.0000e+00 | 5.7221e-10 1.0000e+00 | 5.0000e-01
+    96 | 1.3870e-10 1.0000e+00 | 5.7221e-10 1.0000e+00 | 5.0000e-01
+   128 | 1.3870e-10 1.0000e+00 | 5.7221e-10 1.0000e+00 | 5.0000e-01
+     relative change ngl 24->128: num 1.7e-12 8.5e-13 ; den 4.4e-15 2.4e-14
+
+FAILURES: ['(W3) conifold (square): kernel num/den drift [510.45573147], [3.30846461e-14]', '(W3) Y^{3,2}: kernel num/den drift [2.45262464e-08], [1.59872116e-14]']   (721 s)
