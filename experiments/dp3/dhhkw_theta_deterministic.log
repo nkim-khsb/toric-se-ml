@@ -1,0 +1,26 @@
+deg-18 metric (21 params); contraction = -0.3333333333333333 * L[mu], exact constant 2/3
+
+[1] whole hexagon
+  ngl 16 ( 1536 nodes)
+    published coefficients, our metric : mean 0.666667 (off 1.6e-13)   spread 6.129e-03
+    published coefficients, Guillemin  : mean 0.666667 (off 6.4e-14)   spread 3.568e-01
+    discrimination = 58.2
+    refit order  6 ( 15 par)  const 0.666667 (off 1.5e-13)   spread 3.106e-03
+    refit order  8 ( 24 par)  const 0.666667 (off 1.5e-13)   spread 6.763e-04
+    refit order 10 ( 35 par)  const 0.666667 (off 1.5e-13)   spread 1.366e-04
+  ngl 28 ( 4704 nodes)
+    published coefficients, our metric : mean 0.666667 (off 6.8e-14)   spread 6.129e-03
+    published coefficients, Guillemin  : mean 0.666667 (off 1.3e-13)   spread 3.568e-01
+    discrimination = 58.2
+    refit order  6 ( 15 par)  const 0.666667 (off 5.6e-14)   spread 3.106e-03
+    refit order  8 ( 24 par)  const 0.666667 (off 5.7e-14)   spread 6.763e-04
+    refit order 10 ( 35 par)  const 0.666667 (off 5.6e-14)   spread 1.366e-04
+
+[2] their fitting domain |x_i| < 0.9: 6 vertices, in x = 3s
+    [[-0.9, -0.1], [-0.1, -0.9], [0.9, -0.9], [0.9, 0.1], [0.1, 0.9], [-0.9, 0.9]]
+  ngl 16 ( 1536 nodes)  published coefficients: mean 0.667037   spread 5.590e-03
+  ngl 28 ( 4704 nodes)  published coefficients: mean 0.667037   spread 5.590e-03
+  ngl 40 ( 9600 nodes)  published coefficients: mean 0.667037   spread 5.590e-03
+
+quoted in section 3.5: spreads 6.129e-03 and 3.568e-01, discrimination 58.2,
+  ladder 3.106e-03 / 6.763e-04 / 1.366e-04, fitting-domain mean 0.667037.

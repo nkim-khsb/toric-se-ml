@@ -1,0 +1,30 @@
+grading nodes: 13824 (centroid fan, 48 per direction)
+fitting nodes: 4704 (centroid fan, 28 per direction), deg-18 metric (21 params)
+
+  fitted order 6: 15 coefficients, constant 0.666667 (exact 0.666667), design cond 2.3e+02
+  fitted order 8: 24 coefficients, constant 0.666667 (exact 0.666667), design cond 2.7e+03
+  fitted order 10: 35 coefficients, constant 0.666667 (exact 0.666667), design cond 3.4e+04
+
+               row  n_par      cond  rms(3.46)         E1         E2         E3      E4      E5   Kahler  rank  drop
+  published (6.13)     15        --   6.13e-03  2.038e-06  2.039e-06  1.170e-05  0.4995  0.5000   0.5000     8     6
+    refit, order 6     15   2.3e+02   3.11e-03  1.016e-07  1.016e-07  7.729e-07  0.4968  0.4990   0.5010     8     6
+    refit, order 8     24   2.7e+03   6.76e-04  5.186e-09  5.188e-09  7.470e-08  0.4973  0.4997   0.5003     8     6
+   refit, order 10     35   3.4e+04   1.37e-04  1.554e-10  1.556e-10  2.107e-09  0.4959  0.4999   0.5002     8     6
+
+pre-registered gates
+  (P1') FAIL  three below 1/2, two at 1/2, one at 1 on every row
+  (P2) pass  Kahler direction: 0.99999, 1.00000, 1.00000, 1.00000
+  (P3) FAIL  degeneracy of the two lowest: 1.2e-04, 2.7e-04, 4.2e-04, 1.6e-03
+  (P4) pass  published row against the draft: 2.038e-06, 2.039e-06, 1.170e-05
+  (P5) pass  monotone descent with order
+  (P6) pass  E(order 10)/E(refit 6) = 1.5e-03, 1.5e-03, 2.7e-03  [band 1e-4 to 1e-1; the constancy ratio predicts ~1.7e-3]
+  (P7) FAIL  their order-10 refit against our D=16: 1.3e-01, 1.3e-01, 3.8e-01 times ours
+
+for the draft
+  published -> refit at the SAME order six: 2.04e-06 -> 1.02e-07, 2.04e-06 -> 1.02e-07, 1.17e-05 -> 7.73e-07
+    that step is rounding + their fitting domain + their metric, factor 20.1, 20.1, 15.1
+  refit six -> ten, everything else held: 1.02e-07 -> 1.55e-10, 1.02e-07 -> 1.56e-10, 7.73e-07 -> 2.11e-09, factor 653.7, 652.8, 366.8
+  distances sqrt(2E): published 0.20%, 0.20%, 0.48% | refit order ten 0.002%, 0.002%, 0.006% | ours D=16 0.0048%, 0.0048%, 0.0105%
+
+FAILURES: P1', P3, P7
+elapsed 1310 s

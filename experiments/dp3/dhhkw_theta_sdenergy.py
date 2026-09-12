@@ -32,7 +32,7 @@ PRE-REGISTERED (fixed before running):
   (C) of those 4, exactly 3 have small energy and 1 is O(1) -- the three
       primitive classes and the Kahler direction.
   (M) the three small ones are the number to compare with ours, which at degree
-      16 are 6.2e-11, 8.1e-11, 3.2e-10.  Their fit is sixth order with fourteen
+      16 are 6.2e-11, 8.1e-11, 3.2e-10.  Their fit is sixth order with fifteen
       coefficients and they report ~1e-3 pointwise on the constancy condition,
       so we expect their three to land far above ours; how far is the answer.
 
@@ -59,7 +59,13 @@ from r2b_holomorphic import load_dp3                                 # noqa: E40
 from r2b_stream_potential import poly_quad, UT                       # noqa: E402
 from dhhkw_theta_compare import GROUP, mu_dhhkw                      # noqa: E402
 
-OURS = (6.2e-11, 8.1e-11, 3.2e-10)      # section 6.3, degree 16, 150 generators
+# The admissible (Wachspress) space of the draft, degree 16, 69 generators,
+# deterministic quadrature: r2b_stream_wachspress.log, stable from 16 nodes
+# per direction to 128.  The earlier triple here, 6.2e-11 / 8.1e-11 / 3.2e-10,
+# was the raw stream-potential space under Monte-Carlo integration with a
+# boundary margin, which section 6.2 of the draft retracts: it understates the
+# energy by excluding the region where a polynomial is worst.
+OURS = (1.17e-9, 1.17e-9, 5.56e-9)
 
 
 def A_of(f, s, u):
