@@ -1,12 +1,12 @@
 # toric-se-ml
 
-Code accompanying **"Learning Sasaki--Einstein metrics on del Pezzo cones"**,
-by Nakwoo Kim, Sejin Kim and Hoseob Shin (in preparation).
+Code accompanying **"Numerical Sasaki--Einstein metrics and harmonic forms on
+del Pezzo links"**, by Nakwoo Kim, Sejin Kim and Hoseob Shin (2026).
 
 The paper numerically constructs the Sasaki--Einstein metric on the link of the
 cone over the second del Pezzo surface, at its irregular volume-minimizing Reeb
 vector, together with the two primitive harmonic basic $(1,1)$-forms on it from
-which the $(2,1)$-form of a Klebanov--Tseytlin-type flux is built. This
+which primitive imaginary self-dual $(2,1)$-forms on the cone are built. This
 repository holds the code, the random seeds and the stored minimizers behind
 every number in the paper.
 
@@ -61,7 +61,7 @@ PYTHONPATH=. pytest tests/
 - $T^{1,1}$ calibration: `PYTHONPATH=. pytest tests/test_t11_smoke.py`; the
   $\psi=0$ control statistics quoted in the text come from
   `experiments/t11/psi0_control_reeval.py`, which also reports the slice-Hessian
-  positivity checks of appendix C.
+  positivity checks of appendix B.
 - $Y^{p,q}$ closed-form comparison and the conditioning fix:
   `experiments/ypq/train_y21.py`, `train_ypq_precise.py`,
   `sweep_extreme_lambda.py`, `basis_conditioning.py`; the held-out losses at the
@@ -74,7 +74,11 @@ PYTHONPATH=. pytest tests/
   `laplacian_full_sector.py` (the full torus-invariant spectrum with its $D_6$
   labels), `dhhkw_D_compare.py` (DHHKW's pointwise Einstein-condition measure
   evaluated on our metric), `dhhkw_theta_compare.py` and
-  `dhhkw_theta_sdenergy.py` (their published $(1,1)$-form graded on our metric),
+  `dhhkw_theta_sdenergy.py`, `dhhkw_theta_sdenergy_ladder.py` and
+  `dhhkw_theta_deterministic.py` (their published $(1,1)$-form and refits of
+  their ansatz graded on our metric, with deterministic quadrature),
+  `dhhkw_eigvec_class.py` (the classes and $D_6$ characters of the low-energy
+  directions of their span),
   `invariant_rank_check.py`, `direct_compare.py`, `review_pins_20260911.py`
   (the volume-Hessian and potential-normalization identities), `figures.py`;
   neural-ansatz cross-check: `nn_dp3.py`, `nn_dp3_nosym.py`,
@@ -90,7 +94,9 @@ PYTHONPATH=. pytest tests/
   `r2b_stream_wachspress_checks.py` verifies the structural identities
   $S=\tfrac12(M+T)$ and the harmonic-distance relation and prints the
   quadrature table; `r2b_half_check.py` measures the departure of the
-  non-kernel energies from $\tfrac12$; `fig_period_basis_adm.py` fixes the
+  non-kernel energies from $\tfrac12$; `r2b_arith_check.py` re-evaluates the
+  reported energies directly from the fixed stream functions, without the
+  orthonormal basis change; `fig_period_basis_adm.py` fixes the
   hexagon basis by divisor periods and the pentagon basis by parity, and draws
   the figure.
 
@@ -108,5 +114,6 @@ docstrings referring to it.
 
 ## Citation
 
-If you use this code, please cite the paper. The BibTeX entry will be added at
-publication.
+If you use this code, please cite the paper. The BibTeX entry will be added
+when the preprint appears. The code is released under the MIT License (see
+`LICENSE`).

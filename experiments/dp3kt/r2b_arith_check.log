@@ -1,0 +1,30 @@
+
+=== hexagon dP3, D = 20, trial dim 123 (rank 123), vectors fixed at ngl = 48   [26s]
+  eigensolver E (ngl 48):      2.453930002e-12  2.454301842e-12  1.236375975e-11
+  eigensolver E (ngl 96):      2.453721965e-12  2.454075200e-12  1.236379538e-11
+  density path, ngl  48:       2.454048139e-12  2.454048139e-12  1.236379031e-11
+    agreement with eigensolver:  4.3 digits  4.0 digits  5.6 digits
+    residual paths inv vs adj:   8.1e-13  7.2e-14  1.3e-13
+    longdouble accumulation:     1.7e-13  6.9e-14  2.6e-13
+  density path, ngl  96:       2.454048139e-12  2.454048139e-12  1.236379031e-11
+    agreement with eigensolver:  4.3 digits  4.0 digits  5.6 digits
+    residual paths inv vs adj:   1.3e-13  1.1e-12  8.1e-14
+    longdouble accumulation:     4.5e-13  1.7e-13  1.7e-13
+  [590s]
+  b* = (np.float64(3.0), np.float64(-0.0), np.float64(0.331184))   vol = 0.251420 pi^3
+  SE fit, degree 14 (117 params): train 3.218e-14  held-out 6.041e-14   (paper: 6.04e-14)
+
+=== pentagon dP2 at b*, D = 16, trial dim 80 (rank 80), vectors fixed at ngl = 48   [53s]
+  eigensolver E (ngl 48):      1.386957642e-10  5.722117924e-10
+  eigensolver E (ngl 96):      1.386960293e-10  5.722118908e-10
+  density path, ngl  48:       1.386958198e-10  5.722118113e-10
+    agreement with eigensolver:  6.4 digits  7.5 digits
+    residual paths inv vs adj:   5.4e-14  1.4e-14
+    longdouble accumulation:     1.5e-13  1.5e-13
+  density path, ngl  96:       1.386958198e-10  5.722118113e-10
+    agreement with eigensolver:  6.4 digits  7.5 digits
+    residual paths inv vs adj:   2.7e-14  6.5e-15
+    longdouble accumulation:     2.7e-14  5.4e-16
+  [120s]
+
+FAILURES: ['hexagon dP3 ngl 48: agreement [4.3174744  3.98560195 5.60698095]', 'hexagon dP3 ngl 96: agreement [4.31747451 3.98560191 5.60697962]', 'hexagon dP3 ngl 96: residual paths differ']

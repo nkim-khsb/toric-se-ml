@@ -1,0 +1,20 @@
+six rotations = powers of a generator of order 6: True
+relative diagonal: [1.     0.9683 0.7746 0.75   0.0103 0.0089]
+
+ energy        sum_a c_a / |c|     c.(Sc)/c.c  (a diagonal entry, NOT a character for a 2-dim block)
+ 2.039e-06       5.41e-13        -0.5000
+ 2.039e-06       3.27e-12        -0.5000
+ 1.170e-05       1.76e-12        -1.0000
+ 5.000e-01       1.25e-12        +0.5000
+ 5.000e-01       2.13e-12        +0.5000
+ 1.000e+00       2.45e+00        +1.0000
+
+ block energy   dim   character = trace of the order-6 generator on the block
+ 2.039e-06     2     -1.0000
+ 1.170e-05     1     -1.0000
+ 5.000e-01     2     +1.0000
+ 1.000e+00     1     +1.0000
+
+(sum=0 <=> primitive class.  2-dim block: character -1, eigenvalues exp(+-2pi i/3);
+ 1-dim blocks: eigenvalue = character, -1 alternating, +1 trivial = Kahler direction)
+rerun exit=0
