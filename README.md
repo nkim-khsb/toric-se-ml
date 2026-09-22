@@ -109,8 +109,6 @@ the same `PRNGKey`.
   hexagon basis by divisor periods and the pentagon basis by parity, and draws
   the figure.
 
-Each `experiments/*/note-*.tex` is a standalone derivation note for that rung.
-
 ## Scope
 
 This repository is deliberately scoped to the toric ($T^3$-invariant) part of a
