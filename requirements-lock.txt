@@ -1,0 +1,15 @@
+# Exact versions of the build that produced the runs, timings and stored
+# minimizers reported in the paper (Apple M1 Max, CPU, Python 3.11.9).
+# `requirements.txt` gives the loose constraints; use this file to reproduce
+# the quoted digits.  A second build (JAX 0.4.30, SciPy 1.13.1, Apple M4 Pro)
+# was used only for the cross-build reproducibility check of appendix B.
+jax==0.10.2
+jaxlib==0.10.2
+ml_dtypes==0.6.0
+opt_einsum==3.4.0
+numpy==2.4.6
+scipy==1.17.1
+optax==0.2.8
+matplotlib==3.11.2
+sympy==1.14.0
+pytest==9.1.1

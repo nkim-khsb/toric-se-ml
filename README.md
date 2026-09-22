@@ -56,6 +56,15 @@ pip install -r requirements.txt
 PYTHONPATH=. pytest tests/
 ```
 
+`requirements.txt` gives loose constraints. The runs, timings and stored
+minimizers in the paper come from one build, Python 3.11.9 with JAX 0.10.2
+and SciPy 1.17.1 on the CPU of an Apple M1 Max; its exact versions are in
+`requirements-lock.txt` (`pip install -r requirements-lock.txt`). Runs that
+stop on the optimizer's convergence test reproduce across builds to
+$0.99$--$1.00$ in the held-out residual; runs that exhaust an evaluation cap
+do not, and a different JAX version also draws different sample points from
+the same `PRNGKey`.
+
 ## Reproducing the main results
 
 - $T^{1,1}$ calibration: `PYTHONPATH=. pytest tests/test_t11_smoke.py`; the
