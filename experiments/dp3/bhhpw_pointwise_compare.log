@@ -1,0 +1,25 @@
+== BHHPW arXiv:2609.32655 certified potential vs our dP3 artifacts ==
+  their coefficients: 90x90, max|a| = 1.183e-01, exact symmetry a_mn = (-1)^(m+n) a_nm: max dev 0.0e+00
+  (G0) vertex affine fit: residual 9.32e-17  PASS
+       phi(s) = M s + m,  M =
+[[-3. -3.]
+ [ 3.  0.]]
+       m = [-0.  0.]
+       |det M| = 9.000000000000  (expect 9 = 3^2)
+  (G1) their h in our residual_on_slice: mean +7.293318249322, std 6.853e-15, max|r-mean| 1.954e-14  PASS
+  (G2) Hess[their Guillemin o phi - 3 ours] max 1.56e-11  PASS
+  (G3) D6 invariance of pulled-back psi: max dev 4.44e-16  PASS
+
+  nodes: 3456 (polygon_quadrature ngl=24, flat measure)
+  artifact params  held-out |  rel. metric err rms        max at r/r_vert | psi diff mod affine rms        max spread psi
+  deg-14       14   9.1e-14 |            3.367e-07  2.338e-06       0.975 |               8.180e-10  1.918e-08  8.066e-02
+           (M0) c_ours = -0.701644519411  vs  c_theirs(our gauge) = -0.701644522404   diff +2.99e-09
+  deg-18       21   1.0e-16 |            1.174e-08  1.179e-07       0.987 |               7.598e-11  6.665e-10  8.066e-02
+           (M0) c_ours = -0.701644521701  vs  c_theirs(our gauge) = -0.701644522404   diff +7.03e-10
+
+  corner profile (deg-18), relative metric error along the centre->vertex ray s = t * vertex:
+    t = 0.000: e = 1.145e-08
+    t = 0.500: e = 2.522e-09
+    t = 0.900: e = 1.513e-09
+    t = 0.990: e = 1.104e-07
+    t = 0.999: e = 1.926e-08

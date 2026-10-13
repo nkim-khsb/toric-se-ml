@@ -39,10 +39,16 @@ the regular Reeb vector of the second del Pezzo cone).
   scratch (a few minutes on a CPU) and should reproduce the held-out residuals
   $9.1\times10^{-14}$ (degree 14, fourteen parameters) and $1.0\times10^{-16}$
   (degree 18, twenty-one parameters).
+- `experiments/dp3/bhhpw_coeffs_float64.npy` -- the Chebyshev coefficients of
+  the certified $\mathrm{dP}_3$ Kähler--Einstein potential of Buttsworth,
+  Hadden, Heyes, Platt and Wiseman (arXiv:2609.32655), converted to float64
+  from `data/happrox/candidates/coeffs-rational-nonsymmetric.csv` of their
+  repository `github.com/william-hadden/toric-verified-numerics`; used only by
+  the pointwise comparison below.
 - `tests/` -- closed-form and consistency tests for the modules above,
   including regression tests that pin the paper's headline numbers
   (`test_invariant_basis.py`, `test_dp3_dhhkw_D.py`, `test_curvature_anchors.py`,
-  `test_review_20260911.py`).
+  `test_review_20260911.py`, `test_dp3_bhhpw.py`, `test_dp2_eager_riem2.py`).
 
 The $\mathrm{dP}_2$ Sasaki--Einstein potential is not shipped as a file: it is
 refitted in about a minute by `experiments/dp2/harmonic_forms_dp2.py`, which
@@ -91,11 +97,18 @@ the same `PRNGKey`.
   `invariant_rank_check.py`, `direct_compare.py`, `review_pins_20260911.py`
   (the volume-Hessian and potential-normalization identities), `figures.py`;
   neural-ansatz cross-check: `nn_dp3.py`, `nn_dp3_nosym.py`,
-  `nn_budget_probe.py`.
+  `nn_budget_probe.py`; `bhhpw_pointwise_compare.py` compares the two stored
+  potentials pointwise with the certified potential of arXiv:2609.32655
+  (relative metric error, rms $1.2\times10^{-8}$ and maximum
+  $1.2\times10^{-7}$ at degree 18; its log is included).
 - $\mathrm{dP}_2$: `experiments/dp2/negative_control.py`,
   `negative_control_nn.py`, `width_ladder_released.py` (the released-budget
   width ladder), `floor_vs_volume_excess.py` (the floor against the volume
-  excess), `abreu_grid_bstar.py`, `fig_negative.py`.
+  excess), `abreu_grid_bstar.py`, `fig_negative.py`; `eager_riem2_check.py`
+  evaluates the integrated Riemann-squared curvature of the link on the
+  refitted metric (after reproducing the ladder gate) and compares it with the
+  closed form conjectured from the dual field theory, after reproducing the
+  known values for $T^{1,1}$ and $Y^{2,1}$.
 - Harmonic $(1,1)$-forms: `experiments/dp3kt/r2b_stream_wachspress.py` is the
   production calculation in the admissible space, on all four polygons;
   `r2b_stream_admissible.py` is the diagnosis of the earlier polynomial space
@@ -121,6 +134,5 @@ docstrings referring to it.
 
 ## Citation
 
-If you use this code, please cite the paper. The BibTeX entry will be added
-when the preprint appears. The code is released under the MIT License (see
-`LICENSE`).
+If you use this code, please cite the paper, arXiv:2609.25857. The code is
+released under the MIT License (see `LICENSE`).
